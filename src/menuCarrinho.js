@@ -8,7 +8,6 @@ const containerCarrinho = document.getElementById('carrinho')
 function abrirCarrinho(){
     containerCarrinho.classList.remove('right-[-360px]')
     containerCarrinho.classList.add('right-[0]')
-
 }
 
 function fecharCarrinho(){

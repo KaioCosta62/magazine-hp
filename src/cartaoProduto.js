@@ -16,6 +16,7 @@ function criarCartaoProduto(produto){
 }
 
 
+
 export function renderizarProdutosNaTela(){
     const container = document.getElementById('container-produtos')
 
