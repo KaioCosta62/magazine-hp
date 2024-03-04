@@ -9,7 +9,18 @@
     <title>Magazine HP</title>
   </head>
   <body class="bg-stone-200 flex flex-col">
-    <header class="bg-slate-950 p-5 flex justify-between items-center shadow-xl shadow-slate-400 sticky top-0 left-0 z-50">
+
+    <section id="carrinho" class=" fixed top-0 right-[-360px] w-[360px] bg-slate-950 h-screen z-50 p-10 duration-200">
+      <div id="cabecalho-carrinho" class="text-slate-200 text-xl flex justify-between items-center">
+        <p>Meu carrinho</p>
+        <button id="fechar-carrinho">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+    </section>  
+
+
+    <header class="bg-slate-950 p-5 flex justify-between items-center shadow-xl shadow-slate-400 sticky top-0 left-0 z-40">
       <a href="./">
         <img src="./assets/logo/hashtag.svg" alt="" class="h-[60px]">
       </a>
@@ -17,7 +28,7 @@
         <a href="#">
           <i class="fa-solid fa-user"></i>
         </a>
-        <a href="#">
+        <a href="#" id="abrir-carrinho">
           <i class="fa-solid fa-cart-shopping"></i>
         </a>
       </div>
