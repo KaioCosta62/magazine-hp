@@ -6,10 +6,20 @@ const idsProdutoCarrinhoComQuantidade = resgatarDoLocalStorage('carrinho') ?? {}
 
 const buttonsCarrinho = {
     btnAbrirCarrinho:  document.getElementById('abrir-carrinho'),
-    btnFecharCarrinho: document.getElementById('fechar-carrinho')
+    btnFecharCarrinho: document.getElementById('fechar-carrinho'),
+    btnCheckout: document.getElementById('finalizar-compra')
 }
 
 const containerCarrinho = document.getElementById('carrinho')
+
+function irParaCheckout(){
+    if(Object.keys(idsProdutoCarrinhoComQuantidade).length === 0){
+        alert('Carrinho vazio, tente novamente!')
+        return
+    }
+
+    window.location.href = window.location.origin + '/checkout.html'
+}
 
 function abrirCarrinho(){
     containerCarrinho.classList.remove('right-[-360px]')
@@ -93,8 +103,8 @@ function atualizarPrecoCarrinho(){
             <img src="./assets/imgs/${produto.imagem}.jpg" alt="" class="h-24 rounded-lg"/>
           
             <div class="p-2 flex flex-col justify-between gap-2">
+                <p class="text-slate-200 text-sm">${produto.marca}</p>
                 <p class="text-slate-200 text-sm">${produto.nome}</p>
-                <p class="text-slate-200 text-sm">Camisa Larga com Bolsos</p>
                 <p class="text-lg text-green-700 font-bold">R$ ${produto.preco}</p>
             </div>
             <div class='absolute right-2 bottom-0 text-lg text-white flex gap-2'>
@@ -146,7 +156,9 @@ export function adicionarAoCarrinho(idProduto){
 }
 
 export function inicializarOCarrinho(){
-    const {btnAbrirCarrinho, btnFecharCarrinho} = buttonsCarrinho
+    const {btnAbrirCarrinho, btnFecharCarrinho, btnCheckout} = buttonsCarrinho
     btnAbrirCarrinho.addEventListener('click', abrirCarrinho)
     btnFecharCarrinho.addEventListener('click', fecharCarrinho)
+    btnCheckout.addEventListener('click', irParaCheckout)
 }
+
