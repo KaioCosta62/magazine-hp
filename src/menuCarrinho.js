@@ -1,6 +1,7 @@
 import { catalogoProdutos } from "./catalogoDeProdutos.js"
+import { salvarNoLocalStorage, resgatarDoLocalStorage, removerDoLocalStorage } from "./localStorage.js"
 
-const idsProdutoCarrinhoComQuantidade = {}
+const idsProdutoCarrinhoComQuantidade = resgatarDoLocalStorage('carrinho') ?? {}
 
 
 const buttonsCarrinho = {
@@ -22,6 +23,7 @@ function fecharCarrinho(){
 
 function incrementarQuantidadeProduto(idProduto){
     idsProdutoCarrinhoComQuantidade[idProduto]++
+    salvarNoLocalStorage('carrinho', idsProdutoCarrinhoComQuantidade)
     atualizarPrecoCarrinho()
     atualizarQuantidadeDeProduto(idProduto)
 }
@@ -34,6 +36,7 @@ function decrementarQuantidadeProduto(idProduto){
     }
 
     idsProdutoCarrinhoComQuantidade[idProduto]--
+    salvarNoLocalStorage('carrinho', idsProdutoCarrinhoComQuantidade)
     atualizarQuantidadeDeProduto(idProduto)
     atualizarPrecoCarrinho()
 }
@@ -44,11 +47,13 @@ function atualizarQuantidadeDeProduto(idProduto){
 
 function removerProdutoDoCarrinho(idProduto){
     delete idsProdutoCarrinhoComQuantidade[idProduto]
+    salvarNoLocalStorage('carrinho', idsProdutoCarrinhoComQuantidade)
     atualizarPrecoCarrinho()
     renderizarProdutoNoCarrinho()
 }
 
 function atualizarPrecoCarrinho(){
+   
     let valorTotal = 0
     let precoTotalCarrinho = document.getElementById('preco-total')
 
@@ -60,6 +65,7 @@ function atualizarPrecoCarrinho(){
 
     precoTotalCarrinho.innerText = `Valor total: R$ ${valorTotal},00`
 
+    salvarNoLocalStorage('carrinho', idsProdutoCarrinhoComQuantidade)
 }
 
 
@@ -114,6 +120,9 @@ function atualizarPrecoCarrinho(){
     document.getElementById(`remover-item-${produto.id}`).addEventListener('click', () => removerProdutoDoCarrinho(produto.id))
 
     atualizarPrecoCarrinho()
+    
+    salvarNoLocalStorage('carrinho', idsProdutoCarrinhoComQuantidade)
+
 }
 
 export function renderizarProdutoNoCarrinho(){
@@ -131,7 +140,7 @@ export function adicionarAoCarrinho(idProduto){
         incrementarQuantidadeProduto(idProduto)
         return
     }
-
+    salvarNoLocalStorage('carrinho', idsProdutoCarrinhoComQuantidade)
    idsProdutoCarrinhoComQuantidade[idProduto] = 1
    desenharProdutoNoCarrinho(idProduto)
 }
