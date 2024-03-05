@@ -41,12 +41,18 @@ export function desenharProdutoNoCarrinho(idProduto){
     }
 
     idsProdutoCarrinhoComQuantidade[idProduto] = 1
-    
+
     const produto = catalogoProdutos.find((produto) => produto.id === idProduto)
     const containerProdutoCarrinho = document.getElementById('produtos-carrinho')
 
+    const article = document.createElement('article')
+    const classesArticle = ['relative', 'flex', 'bg-slate-700', 'rounded-lg', 'p-1']
+
+    for(const classe of classesArticle){
+        article.classList.add(classe)
+    }
+
     const htmlProdutoCarrinho = `
-        <article class="relative flex bg-slate-700 rounded-lg p-1">
             <img src="./assets/imgs/${produto.imagem}.jpg" alt="" class="h-24 rounded-lg">
             <button class="remover-produto-${produto.id} absolute top-0 right-2 text-slate-200">
             <i class="fa-solid fa-xmark"></i>
@@ -65,10 +71,11 @@ export function desenharProdutoNoCarrinho(idProduto){
                    -
                 </button>
             </div>
-        </article>
     `
 
-    containerProdutoCarrinho.innerHTML += htmlProdutoCarrinho
+    article.innerHTML = htmlProdutoCarrinho
+
+    containerProdutoCarrinho.appendChild(article)
     
     document.getElementById(`incrementar-produto-${produto.id}`).addEventListener('click', () => incrementarQuantidadeProdutoNoCarrinho(produto.id))
     
