@@ -1,5 +1,5 @@
 import { catalogoProdutos } from "./catalogoDeProdutos";
-import {desenharProdutoNoCarrinho} from './menuCarrinho.js'
+import {adicionarAoCarrinho} from './menuCarrinho.js'
 
 
 function criarCartaoProduto(produto){
@@ -27,6 +27,6 @@ export function renderizarProdutosNaTela(){
     }
 
     for(const produto of catalogoProdutos){
-        document.getElementById(`adicionar-produto-${produto.id}`).addEventListener('click', ()=> desenharProdutoNoCarrinho(produto.id))
+        document.getElementById(`adicionar-produto-${produto.id}`).addEventListener('click', ()=> adicionarAoCarrinho(produto.id))
     }
 }
